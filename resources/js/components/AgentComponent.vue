@@ -7,7 +7,7 @@
             <div>INFO: {{ infoText}}</div>
         </div>
         <div class="col-12 mt-5">
-            <div id="local-media"></div>
+            <div id="remote-media-div"></div>
         </div>
     </div>
 </template>
@@ -46,6 +46,21 @@
                     return connect(this.agent.twilioToken, { name: this.agent.twilioRoomName, tracks: localTracks });
                 }).then(room => {
                     console.log('Connected to room ' + room.name);
+                    room.on('participantConnected', participant => {
+                        console.log(`Agent that is connected: ${participant}`);
+
+                        participant.tracks.forEach(publication => {
+                            if (publication.isSubscribed) {
+                                const track = publication.track;
+                                document.getElementById('remote-media-div').appendChild(track.attach());
+                            }
+                        });
+
+                        participant.on('trackSubscribed', track => {
+                            document.getElementById('remote-media-div').appendChild(track.attach());
+                        });
+
+                    });
                 });
             }
         }

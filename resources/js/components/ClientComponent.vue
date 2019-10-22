@@ -69,13 +69,13 @@
             //         });
             // },
             callTwilio() {
-                const {connect} = require('twilio-video');
+                const { connect, createLocalTracks } = require('twilio-video');
 
-                connect(this.client.twilioToken, {
-                    name: this.client.twilioRoomName,
-                    audio: true,
-                    video: {width: 640},
-                    tracks: []
+                navigator.mediaDevices.enumerateDevices().then(devices => {
+                    const videoInput = devices.find(device => device.kind === 'videoinput');
+                    return createLocalTracks({ audio: true, video: { deviceId: videoInput.deviceId } });
+                }).then(localTracks => {
+                    return connect(this.client.twilioToken, { name: this.client.twilioRoomName, tracks: localTracks });
                 }).then(room => {
                     console.log(`A CLIENT connected to room ${room}`);
                     room.on('participantConnected', participant => {
@@ -96,6 +96,32 @@
                 }, error => {
                     console.error(`Unable to connect to Room: ${error.message}`);
                 });
+
+                // connect(this.client.twilioToken, {
+                //     name: this.client.twilioRoomName,
+                //     audio: true,
+                //     video: {width: 640},
+                //     tracks: []
+                // }).then(room => {
+                //     console.log(`A CLIENT connected to room ${room}`);
+                //     room.on('participantConnected', participant => {
+                //         console.log(`Agent that is connected: ${participant}`);
+                //
+                //         participant.tracks.forEach(publication => {
+                //             if (publication.isSubscribed) {
+                //                 const track = publication.track;
+                //                 document.getElementById('remote-media-div').appendChild(track.attach());
+                //             }
+                //         });
+                //
+                //         participant.on('trackSubscribed', track => {
+                //             document.getElementById('remote-media-div').appendChild(track.attach());
+                //         });
+                //
+                //     });
+                // }, error => {
+                //     console.error(`Unable to connect to Room: ${error.message}`);
+                // });
             }
 
         }
