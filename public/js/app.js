@@ -17101,10 +17101,10 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     console.log('listening on my own agent-channel');
-    window.Echo.channel('laravel_database_agent-channel').listen('CallReceived', function (e) {
-      _this.infoText = 'Got token from event and room name ' + e.room;
+    window.Echo.channel('agent-channel').listen('\\App\\Containers\\VideoCall\\Events\\Events\\RoomCreatedEvent', function (e) {
+      _this.infoText = 'Got token from event and room name ' + e.roomName;
       _this.agent.twilioToken = e.token;
-      _this.agent.twilioRoomName = e.room;
+      _this.agent.twilioRoomName = e.roomName;
 
       _this.callTwilio();
 
@@ -17172,7 +17172,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      token: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImVkNmJmMjFhZTUyMWJmMGU2ZmNlMGI0MzdmZjBlMWEzNTEwMjFmNzEzNzEyMWQ0MGQwYjRiMjVlY2VhMWI4NmQwZGQxZDRjODEzMWE0ZmU4In0.eyJhdWQiOiIxIiwianRpIjoiZWQ2YmYyMWFlNTIxYmYwZTZmY2UwYjQzN2ZmMGUxYTM1MTAyMWY3MTM3MTIxZDQwZDBiNGIyNWVjZWExYjg2ZDBkZDFkNGM4MTMxYTRmZTgiLCJpYXQiOjE1NzE2NTkxMTgsIm5iZiI6MTU3MTY1OTExOCwiZXhwIjoxNTcxNzQ1NTE4LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.delpzHj55PxEublvWx2cbyVfgTgymY3I5kYMsPXmLS-gFltwxszXc1VY_yp4cM2bUuijKAnaf-z45BsOiLno-DdA20WFs9Q-EgiXDfXTbgV4SSrs_mhUeGW2rxjomJGLL2KhkTKzevNswzYYwp7VhafbXf5aJ1CseTLLpeQI04GlJsWixZe7qmsW5uy1AjJiBzRKiCbGWTH75ypRRHz0rtcHdOSw39oxa_SBkI06P_tgNeKokWxesijCakVJgfQDZLoHVyiIUSK1tHMCdq7-kEDNyW9Yq9QP5QuKkIssBvJ904f86sKbGrdYG0WeSbyPfq4ISIwqpKBa3i908P8b9LStr3rw8XZHwMAtfqTKDFmKpu9lpzMjEv1O_2GdvGeTHj32MGpkD7QJt97cln6F716eGA93J8DzMqsAzr7sJEPf7Am1GcsVpSvvqfRHfbORGSQjkCz9NLDkDlTrXzk4lIPgm3SvdLrnysHUHJbG_9So5BPvcv1LSa5H0GINNmJiIA4ltcqtLhDujRjjwpKGuc8hLJJB5dysCCf_sVIg6KoIbfnVjRFYpOuITJmq_FhNE5tV5htsIylCw4rJ9xvnlJl-M1z4aTPX7vJVfPys7CIcgw46Aelgrb1Bj0iHfKSsfwBief3QxVzI00t_rkopepEFKp4MN6Kc-zQg_GHtHss',
+      token: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY2MjNkMTUxYzY5MzdjODFmYmFmZDEwNWJhMzVkNGUzNGNlODhkMDBhMTZkYjg0MzMyN2ZmOTc5MTlkNGI5ZjYzZmU2YTg3Zjg0MDRlNWNhIn0.eyJhdWQiOiIxIiwianRpIjoiNjYyM2QxNTFjNjkzN2M4MWZiYWZkMTA1YmEzNWQ0ZTM0Y2U4OGQwMGExNmRiODQzMzI3ZmY5NzkxOWQ0YjlmNjNmZTZhODdmODQwNGU1Y2EiLCJpYXQiOjE1NzE3Mjc5MzYsIm5iZiI6MTU3MTcyNzkzNiwiZXhwIjoxNTcxODE0MzM2LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.UF0L40DGRCLnTKBCJYB799V05GUrujJTRngWp--zdjNuVhXmVQbS1FEvEWmmb62FC-GBbVxAY2lImHmTCouG7d2843YB_ETNCy0X97DQofGbrHd-lIXONMyHDvR_RMxfNsl1_x8kAfZStdKwnDkp6VVayFsuOGJ9firnt2oVvjTsoqjaA8bXGvxUCP5cBNwcc4QD3Sg-9IVK4y2VXOy0ibVGXCRfRmG0Ezr8yeJPu-ZP3nLxIaS8B_Nikx_u6McM7EnA1FOUuY7tcN8Wzf9ipwr0Q8x1T2sH-Qid2GhnhEvhNnW2l2LkfdW4WaQBDurAfhPwVE_wz8Rb0Hg1uFxwqYEJDVke3G9rFgY13DNlSgqtzeOjWmaULBLAEMecO0hBkJC4S98EcNkfeVWFMrzhuXXfbnUV6BT2sVawsMp08spnBl8G90qAq3UpH91wWIQLgJmT-AtXDnO8lf6m3KfXg1-nBURnRJWJXr0e7L1cDUhGvE6iENopJzgwc4bT0qsaBLq5Lk-Y-tMKYLX5Fwov98PpDJOLOVtSzmqHTZOub-Hqrk7PmYYUY0Kts_d9LhBZUwGM8ywiKQC7Wb66th8EJmgp5agAEHPzmAisyXMg50_J1IRrYGmwmTTfocwKfGCdftApev0D2omN2WWaInTsfe6WsYqRwlU1eM7O-Qj_i64',
       infoText: '',
       client: {},
       agent: {},
@@ -17196,9 +17196,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.client.twilioRoomName = response.data.roomName;
         _this.client.twilioToken = response.data.clientToken;
         _this.agent.twilioRoomName = response.data.roomName;
-        _this.agent.twilioToken = response.data.agentToken;
-
-        _this.fireEvent(_this.agent);
+        _this.agent.twilioToken = response.data.agentToken; // this.fireEvent(this.agent);
 
         _this.infoText = 'Got token and room name ' + _this.client.twilioRoomName;
 
@@ -17210,16 +17208,16 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    fireEvent: function fireEvent(agent) {
-      var _this2 = this;
-
-      axios.get('/call-agent?token=' + agent.twilioToken + '&room=' + agent.twilioRoomName).then(function (response) {
-        console.log(response);
-      })["catch"](function (error) {
-        _this2.infoText = 'Error ' + error.message;
-        console.log(error);
-      });
-    },
+    // fireEvent(agent) {
+    //     axios.get('/call-agent?token=' + agent.twilioToken + '&room=' + agent.twilioRoomName)
+    //         .then(response => {
+    //             console.log(response);
+    //         })
+    //         .catch(error => {
+    //             this.infoText = 'Error ' + error.message;
+    //             console.log(error);
+    //         });
+    // },
     callTwilio: function callTwilio() {
       var _require = __webpack_require__(/*! twilio-video */ "./node_modules/twilio-video/es5/index.js"),
           connect = _require.connect;
@@ -81685,7 +81683,7 @@ window.io = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.i
 
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'socket.io',
-  host: 'http://' + window.location.hostname + ':6001' // auth:
+  host: 'http://api.anythingxxx.local:6001' // auth:
   //     {
   //         headers:
   //             {

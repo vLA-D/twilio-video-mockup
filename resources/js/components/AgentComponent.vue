@@ -25,11 +25,11 @@
         },
         created() {
             console.log('listening on my own agent-channel');
-            window.Echo.channel('laravel_database_agent-channel')
-                .listen('CallReceived', e => {
-                    this.infoText = 'Got token from event and room name ' + e.room;
+            window.Echo.channel('agent-channel')
+                .listen('\\App\\Containers\\VideoCall\\Events\\Events\\RoomCreatedEvent', e => {
+                    this.infoText = 'Got token from event and room name ' + e.roomName;
                     this.agent.twilioToken = e.token;
-                    this.agent.twilioRoomName = e.room;
+                    this.agent.twilioRoomName = e.roomName;
                     this.callTwilio();
                     console.log(e);
                 })

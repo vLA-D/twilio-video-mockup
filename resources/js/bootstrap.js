@@ -24,7 +24,7 @@ window.io = require('socket.io-client');
 
 window.Echo = new Echo({
     broadcaster: 'socket.io',
-    host: 'http://' + window.location.hostname + ':6001',
+    host: 'http://api.anythingxxx.local:6001',
     // auth:
     //     {
     //         headers:
