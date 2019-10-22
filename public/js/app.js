@@ -17136,7 +17136,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }).then(function (room) {
         console.log('Connected to room ' + room.name);
-        room.on('participantConnected', function (participant) {
+        room.participants.forEach(function (participant) {
           console.log("Agent that is connected: ".concat(participant));
           participant.tracks.forEach(function (publication) {
             if (publication.isSubscribed) {

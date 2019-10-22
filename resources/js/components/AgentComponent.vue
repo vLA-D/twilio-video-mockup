@@ -46,7 +46,7 @@
                     return connect(this.agent.twilioToken, { name: this.agent.twilioRoomName, tracks: localTracks });
                 }).then(room => {
                     console.log('Connected to room ' + room.name);
-                    room.on('participantConnected', participant => {
+                    room.participants.forEach(participant => {
                         console.log(`Agent that is connected: ${participant}`);
 
                         participant.tracks.forEach(publication => {
