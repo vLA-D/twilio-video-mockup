@@ -41,8 +41,8 @@
                         this.client.twilioRoomName = response.data.roomName;
                         this.client.twilioToken = response.data.clientToken;
 
-                        this.agent.twilioRoomName = response.data.roomName;
-                        this.agent.twilioToken = response.data.agentToken;
+                        // this.agent.twilioRoomName = response.data.roomName;
+                        // this.agent.twilioToken = response.data.agentToken;
 
                         // this.fireEvent(this.agent);
 
